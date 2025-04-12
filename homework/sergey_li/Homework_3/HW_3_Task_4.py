@@ -1,5 +1,6 @@
 import math
 
+
 def triangle_info(a, b):
     hypotenuse = math.sqrt(a**2 + b**2)
     area = 0.5 * a * b

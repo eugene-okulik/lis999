@@ -1,4 +1,4 @@
-def calculation(a,b):
+def calculation(a, b):
     num_sum = a + b
     num_dif_1 = a - b
     num_dif_2 = b - a

@@ -1,5 +1,6 @@
 import math
 
+
 def calculate_average(num_1, num_2):
     calculation_1 = round(((num_1 + num_2) / 2), 1)
     if num_1 < 0 or num_2 < 0:
