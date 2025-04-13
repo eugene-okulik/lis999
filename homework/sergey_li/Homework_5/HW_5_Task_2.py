@@ -6,6 +6,7 @@ result_3 = "результат работы программы: 9"
 def change_result(result):
     return int(result[20:]) + 10
 
+
 def change_result_2(result):
     return int(result[28:]) + 10
 
