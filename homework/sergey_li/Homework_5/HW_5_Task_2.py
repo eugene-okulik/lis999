@@ -6,5 +6,5 @@ lines = [
 
 for sentence in lines:
     find_index = sentence.index(":")
-    number = int(sentence[find_index + 1 :].strip())
+    number = int(sentence[find_index + 1:].strip())
     print(number + 10)
