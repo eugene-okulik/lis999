@@ -21,11 +21,13 @@ class SchoolBook(Book):
     def school_book_details(self):
         if self.reserved:
             print(
-                f"Title: {self.title}, Author: {self.author}, Pages: {self.pages}, Subject: {self.subject}, Grade: {self.grade}, reserved"
+                f"Title: {self.title}, Author: {self.author}, Pages: {self.pages}, Subject: {self.subject}, "
+                f"Grade: {self.grade}, reserved"
             )
         else:
             print(
-                f"Title: {self.title}, Author: {self.author}, Pages: {self.pages}, Subject: {self.subject}, Grade: {self.grade}"
+                f"Title: {self.title}, Author: {self.author}, Pages: {self.pages}, Subject: {self.subject}, "
+                f"Grade: {self.grade}"
             )
 
 
