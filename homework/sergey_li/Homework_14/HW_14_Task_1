@@ -1,0 +1,34 @@
+insert into students (name, second_name, group_id) VALUES ('sergo', 'lee', 5006)
+insert into `groups` (title, start_date, end_date) values ('SEA107', 'Sep 2023', 'Jun 2025')
+insert into books (title, taken_by_student_id) values ('Tahoe', '20272')
+insert into books (title, taken_by_student_id) values ('Bingo', '20272')
+insert into books (title, taken_by_student_id) values ('Grace', '20272')
+insert into subjets (title) values ('Functional testing')
+insert into subjets (title) values ('Security testing')
+insert into lessons (title, subject_id) values ('Smoke', '10217')
+insert into lessons (title, subject_id) values ('Sanity', '10217')
+insert into lessons (title, subject_id) values ('Smoke', '10218')
+insert into lessons (title, subject_id) values ('E2E', '10218')
+insert into marks (value, lesson_id, student_id) values ('5', '9643', 20272)
+insert into marks (value, lesson_id, student_id) values ('4', '9644', 20272)
+insert into marks (value, lesson_id, student_id) values ('3', '9645', 20272)
+insert into marks (value, lesson_id, student_id) values ('2', '9646', 20272)
+
+select value from marks where student_id = 20272
+select title from books where taken_by_student_id = 20272
+
+SELECT
+    s.name,
+    s.second_name,
+    g.title AS group_title,
+    b.title AS book_title,
+    sub.title AS subject_title,
+    l.title AS lesson_title,
+    m.value AS mark_value
+FROM students s
+JOIN `groups` g ON s.group_id = g.id
+LEFT JOIN books b ON b.taken_by_student_id = s.id
+JOIN marks m ON m.student_id = s.id
+JOIN lessons l ON l.id = m.lesson_id
+JOIN subjets sub ON sub.id = l.subject_id
+WHERE s.id = 20272;
