@@ -1,22 +1,22 @@
-insert into students (name, second_name, group_id) VALUES ('sergo', 'lee', 5006)
-insert into `groups` (title, start_date, end_date) values ('SEA107', 'Sep 2023', 'Jun 2025')
-insert into books (title, taken_by_student_id) values ('Tahoe', '20272')
-insert into books (title, taken_by_student_id) values ('Bingo', '20272')
-insert into books (title, taken_by_student_id) values ('Grace', '20272')
+insert into students (name, second_name, group_id) VALUES ('Student', 'Poor', Null)
+insert into books (title, taken_by_student_id) values ('Tower', '20273')
+insert into books (title, taken_by_student_id) values ('Bridge', '20273')
+insert into books (title, taken_by_student_id) values ('Sky', '20273')
+insert into `groups` (title, start_date, end_date) values ('SEA108', 'Sep 2023', 'Jun 2025')
+Update students set group_id = (select id from `groups` where title = 'SEA108') where id = 20273
 insert into subjets (title) values ('Functional testing')
 insert into subjets (title) values ('Security testing')
 insert into lessons (title, subject_id) values ('Smoke', '10217')
 insert into lessons (title, subject_id) values ('Sanity', '10217')
 insert into lessons (title, subject_id) values ('Smoke', '10218')
 insert into lessons (title, subject_id) values ('E2E', '10218')
-insert into marks (value, lesson_id, student_id) values ('5', '9643', 20272)
-insert into marks (value, lesson_id, student_id) values ('4', '9644', 20272)
-insert into marks (value, lesson_id, student_id) values ('3', '9645', 20272)
-insert into marks (value, lesson_id, student_id) values ('2', '9646', 20272)
+insert into marks (value, lesson_id, student_id) values ('5', '9643', 20273)
+insert into marks (value, lesson_id, student_id) values ('4', '9644', 20273)
+insert into marks (value, lesson_id, student_id) values ('3', '9645', 20273)
+insert into marks (value, lesson_id, student_id) values ('2', '9646', 20273)
 
-select value from marks where student_id = 20272
-select title from books where taken_by_student_id = 20272
-
+select value from marks where student_id = 20273
+select title from books where taken_by_student_id = 20273
 SELECT
     s.name,
     s.second_name,
@@ -31,4 +31,4 @@ LEFT JOIN books b ON b.taken_by_student_id = s.id
 JOIN marks m ON m.student_id = s.id
 JOIN lessons l ON l.id = m.lesson_id
 JOIN subjets sub ON sub.id = l.subject_id
-WHERE s.id = 20272;
+WHERE s.id = 20273;
