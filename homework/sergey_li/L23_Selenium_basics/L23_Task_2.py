@@ -1,8 +1,7 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.select import Select
 from selenium.webdriver.support.wait import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support import expected_conditions as ec
 from selenium.webdriver.common.keys import Keys
 import pytest
 from selenium.webdriver.chrome.options import Options
@@ -35,7 +34,7 @@ def test_first_name(driver):
     user_email.send_keys("sergey.sergey@yahoo.com")
 
     male = WebDriverWait(driver, 10).until(
-        EC.presence_of_element_located(
+        ec.presence_of_element_located(
             (By.CSS_SELECTOR, "#genterWrapper label.custom-control-label")
         )
     )
@@ -60,13 +59,13 @@ def test_first_name(driver):
     current_address.send_keys("somewhere in Seattle")
 
     select_state = WebDriverWait(driver, 10).until(
-        EC.element_to_be_clickable((By.ID, "react-select-3-input"))
+        ec.element_to_be_clickable((By.ID, "react-select-3-input"))
     )
     select_state.send_keys("Uttar Pradesh")
     select_state.send_keys(Keys.ENTER)
 
     select_city = WebDriverWait(driver, 10).until(
-        EC.element_to_be_clickable((By.ID, "react-select-4-input"))
+        ec.element_to_be_clickable((By.ID, "react-select-4-input"))
     )
     select_city.send_keys("Merrut")
     select_city.send_keys(Keys.ENTER)
@@ -74,13 +73,13 @@ def test_first_name(driver):
     submit = driver.find_element(By.CSS_SELECTOR, "#submit")
     submit.click()
 
-    print(first_name.text)
-    print(last_name.text)
-    print(user_email.text)
+    print(first_name.get_attribute("value"))
+    print(last_name.get_attribute("value"))
+    print(user_email.get_attribute("value"))
     print(male.text)
-    print(user_number.text)
-    print(date_of_birth.text)
+    print(user_number.get_attribute("value"))
+    print(date_of_birth.get_attribute("value"))
     print(hobby.text)
-    print(current_address.text)
-    print(select_state.text)
-    print(select_city.text)
+    print(current_address.get_attribute("value"))
+    print(select_state.get_attribute("value"))
+    print(select_city.get_attribute("value"))
