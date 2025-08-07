@@ -41,7 +41,7 @@ def test_first_name(driver):
     male.click()
 
     user_number = driver.find_element(By.ID, "userNumber")
-    user_number.send_keys("123456789")
+    user_number.send_keys("4253456789")
 
     date_of_birth = driver.find_element(By.ID, "dateOfBirthInput")
     date_of_birth.click()
@@ -49,8 +49,21 @@ def test_first_name(driver):
     date_of_birth.send_keys("30 May 1984")
     date_of_birth.send_keys(Keys.ENTER)
 
-    # subject_container = driver.find_element(By.ID, "subjectContainer")
-    # subject_container.send_keys("Filling the practice form")
+    subject_container = WebDriverWait(driver, 10).until(
+        ec.element_to_be_clickable(
+            (
+                By.CSS_SELECTOR,
+                "#subjectsContainer .subjects-auto-complete__value-container--is-multi",
+            )
+        )
+    )
+    subject_container.click()
+
+    input_field = WebDriverWait(driver, 10).until(
+        ec.element_to_be_clickable((By.CSS_SELECTOR, "#subjectsContainer input"))
+    )
+    input_field.send_keys("Chemistry")
+    input_field.send_keys(Keys.ENTER)
 
     hobby = driver.find_element(By.XPATH, "//label[contains(text(), 'Music')]")
     hobby.click()
