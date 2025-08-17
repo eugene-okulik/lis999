@@ -6,7 +6,7 @@ from selenium.webdriver.common.keys import Keys
 import pytest
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.action_chains import ActionChains
-from time import sleep
+
 
 options = Options()
 # options.add_argument("start-maximized")
@@ -17,7 +17,6 @@ def driver():
     chrome_driver = webdriver.Chrome(options=options)
     chrome_driver.maximize_window()
     yield chrome_driver
-    sleep(3)
     chrome_driver.quit()
 
 
@@ -51,10 +50,9 @@ def test_product_new_tab(driver):
         )
     )
     continue_button.click()
-    sleep(3)
+    wait.until(ec.invisibility_of_element_located((By.CLASS_NAME, "modal-content")))
     driver.close()
-    sleep(3)
-
+    wait.until(lambda d: len(d.window_handles) == 1)
     driver.switch_to.window(main_window)
 
     shopping_cart = wait.until(
@@ -81,9 +79,7 @@ def test_compare_products(driver):
     action.move_to_element(product).perform()
     action.move_to_element(compare_button).click().perform()
 
-    sleep(3)
     items_to_compare = wait.until(
-        ec.presence_of_element_located((By.CSS_SELECTOR, ".block-compare"))
+        ec.visibility_of_element_located((By.CSS_SELECTOR, ".block-compare"))
     )
     assert "Push It Messenger Bag" in items_to_compare.text
-    sleep(3)
