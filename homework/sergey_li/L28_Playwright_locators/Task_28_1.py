@@ -27,7 +27,8 @@ def test_practice_form(page: Page):
     date_of_birth.fill("May 30 1984")
     date_of_birth.press("Enter")
     object_field = page.locator(
-        'div[class = "subjects-auto-complete__value-container subjects-auto-complete__value-container--is-multi css-1hwfws3"]'
+        'div[class = "subjects-auto-complete__value-container '
+        'subjects-auto-complete__value-container--is-multi css-1hwfws3"]'
     )
     object_field.click()
     sleep(2)
