@@ -3,8 +3,9 @@ import re
 from time import sleep
 
 
-def test_accept_alert(page: Page):
+def test_acceptance_alert(page: Page):
+    page.on("dialog", lambda alert: alert.accept())
     page.goto("https://www.qa-practice.com/elements/alert/confirm#")
-    sleep(3)
     page.get_by_role("link", name="Click").click()
-    sleep(3)
+    result_text = page.locator("#result-text")
+    expect(result_text).to_have_text("Ok")
