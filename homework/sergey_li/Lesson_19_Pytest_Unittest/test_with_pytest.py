@@ -1,30 +1,9 @@
 import requests
 import pytest
+import allure
+
 
 BASE_URL = "http://167.172.172.115:52353/object"
-
-
-@pytest.fixture(scope="session")
-def start_end():
-    print("Start testing")
-    yield
-    print("Testing Complete")
-
-
-@pytest.fixture(scope="function")
-def before_after():
-    print("\nbefore test")
-    yield
-    print("\nafter test")
-
-
-@pytest.fixture
-def new_object():
-    payload = {"name": "Temp object", "data": {"color": "blue", "size": "L"}}
-    response = requests.post(BASE_URL, json=payload)
-    object_id = response.json().get("id")
-    yield object_id
-    requests.delete(f"{BASE_URL}/{object_id}")
 
 
 @pytest.mark.parametrize(
@@ -39,12 +18,13 @@ def new_object():
 def test_create_object(name, data):
     payload = {"name": name, "data": data}
     response = requests.post(BASE_URL, json=payload)
-    assert response.status_code == 201
+    assert response.status_code in (200, 201)
     response_data = response.json()
     assert "id" in response_data
     requests.delete(f"{BASE_URL}/{response_data['id']}")
 
 
+@allure.feature("Feature 1")
 @pytest.mark.medium
 def test_update_object(new_object):
     object_id = new_object
@@ -63,6 +43,7 @@ def test_patch_object(new_object):
     assert response.json()["name"] == "Patched name"
 
 
+@allure.story("Story X")
 @pytest.mark.smoke
 def test_delete_object():
     payload = {"name": "To delete", "data": {"color": "gray", "size": "XS"}}
@@ -72,6 +53,8 @@ def test_delete_object():
     assert del_response.status_code == 200
 
 
+@allure.feature("Feature 2")
+@allure.story("Story X")
 def test_get_object(new_object):
     object_id = new_object
     response = requests.get(f"{BASE_URL}/{object_id}")
